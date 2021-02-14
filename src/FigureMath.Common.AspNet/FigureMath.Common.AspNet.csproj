@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ensure.That" Version="9.2.0" />
+      <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
+      <PackageReference Include="Scrutor" Version="3.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\FigureMath.Common\FigureMath.Common.csproj" />
+    </ItemGroup>
+
+</Project>

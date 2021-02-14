@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  figure-math-api:
+    image: figure-math-api
+    build:
+      context: .
+      dockerfile: src/FigureMath.Apps.WebApi/Dockerfile
+      target: runtime
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DockerDesktop
+    ports:
+    - 9293:80
+    depends_on:
+      - postgres
+  
+  pgadmin:    
+    image: dpage/pgadmin4
+    ports:
+      - 8000:80 
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@home.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  pgadmin_data:
