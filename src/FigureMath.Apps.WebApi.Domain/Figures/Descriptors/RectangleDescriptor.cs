@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using EnsureThat;
 using FigureMath.Data.Enums;
 using FluentValidation;
 using FluentValidation.Results;
@@ -11,27 +10,17 @@ namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
     /// Describes a Rectangle.
     /// </summary>
     [UsedImplicitly]
-    public class RectangleDescriptor : IFigureDescriptor
+    public class RectangleDescriptor : FigureDescriptorBase
     {
         /// <summary>
-        /// Type of the figure this implementation describes.
+        /// Initializes a new instance of the <see cref="RectangleDescriptor"/> class.
         /// </summary>
-        public FigureType FigureType => FigureType.Rectangle;
+        public RectangleDescriptor()
+            : base(FigureType.Rectangle, RectangleInfo.PropNames.All)
+        { }
 
-        /// <summary>
-        /// Required properties the client must specify.
-        /// </summary>
-        public string[] RequiredProps => RectangleInfo.PropNames.All;
-
-        /// <summary>
-        /// Validates values of the figure properties.
-        /// </summary>
-        /// <param name="figureProps">Figure properties.</param>
-        /// <returns>If no failures then empty or validation failures.</returns>
-        public ValidationResult ValidateProps(IDictionary<string, double> figureProps)
+        protected override ValidationResult ValidatePropsValues(IDictionary<string, double> figureProps)
         {
-            EnsureArg.HasItems(figureProps, nameof(figureProps));
-
             var data = new RectangleData
             {
                 Width = figureProps[RectangleInfo.PropNames.Width],
@@ -42,7 +31,7 @@ namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
 
             return validator.Validate(data);
         }
-        
+
         private class RectangleData
         {
             public double Width { get; init; }

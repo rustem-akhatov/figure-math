@@ -13,12 +13,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
         /// Type of the figure this implementation describes.
         /// </summary>
         FigureType FigureType { get; }
-        
-        /// <summary>
-        /// Required properties the client must specify.
-        /// </summary>
-        // ReSharper disable once ReturnTypeCanBeEnumerable.Global
-        string[] RequiredProps { get; }
 
         /// <summary>
         /// Validates values of the figure properties.

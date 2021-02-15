@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using EnsureThat;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
 using FluentValidation;
@@ -37,47 +36,15 @@ namespace FigureMath.Apps.WebApi.Models.Figures
             var model = (PostFigureModel)context.ParentContext.InstanceToValidate;
             
             IFigureDescriptor figureDescriptor = _figureDescriptorProvider.GetDescriptorFor(model.FigureType);
-            
-            // All the props we need to calculate area (at this moment) for the figure.
-            HashSet<string> requiredProps = figureDescriptor.RequiredProps.ToHashSet();
 
-            if (figureProps.Count == 0)
+            ValidationResult validationResult = figureDescriptor.ValidateProps(figureProps);
+
+            foreach (ValidationFailure failure in validationResult.Errors)
             {
-                context.AddFailure($"You need to specify these properties {ConvertPropsToLine(requiredProps)}.");
-                return;
-            }
-                    
-            if (figureProps.Count > requiredProps.Count)
-            {
-                context.AddFailure($"Too many properties specified. You need to specify only these properties {ConvertPropsToLine(requiredProps)}.");
-                return;
-            }
+                string propertyName = failure.PropertyName == null ? context.PropertyName : $"{context.PropertyName}.{failure.PropertyName}";
 
-            foreach (string key in figureProps.Keys)
-            {
-                requiredProps.Remove(key);
+                context.AddFailure(new ValidationFailure(propertyName, failure.ErrorMessage, failure.AttemptedValue));
             }
-
-            if (requiredProps.Count > 0)
-            {
-                context.AddFailure($"These properties were not specified {ConvertPropsToLine(requiredProps)}. You must specify them.");
-                return;
-            }
-
-            ValidationResult propsValidationResult = figureDescriptor.ValidateProps(figureProps);
-
-            if (propsValidationResult.IsValid)
-                return;
-            
-            foreach (ValidationFailure failure in propsValidationResult.Errors)
-            {
-                context.AddFailure(new ValidationFailure($"{context.PropertyName}.{failure.PropertyName}", failure.ErrorMessage, failure.AttemptedValue));
-            }
-        }
-
-        private static string ConvertPropsToLine(IEnumerable<string> props)
-        {
-            return $"[{string.Join(", ", props)}]";
         }
     }
 }

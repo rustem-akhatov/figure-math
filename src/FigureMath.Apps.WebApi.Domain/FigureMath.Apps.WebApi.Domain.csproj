@@ -50,6 +50,9 @@
       <Compile Update="Figures\FigureInfoTypeProvider.cs">
         <DependentUpon>IFigureInfoTypeProvider.cs</DependentUpon>
       </Compile>
+      <Compile Update="Figures\Descriptors\FigureDescriptorBase.cs">
+        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

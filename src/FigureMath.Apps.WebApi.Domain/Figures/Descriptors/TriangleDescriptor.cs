@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using EnsureThat;
 using FigureMath.Data.Enums;
 using FluentValidation;
 using FluentValidation.Results;
@@ -11,27 +10,17 @@ namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
     /// Describes a Triangle.
     /// </summary>
     [UsedImplicitly]
-    public class TriangleDescriptor : IFigureDescriptor
+    public class TriangleDescriptor : FigureDescriptorBase
     {
         /// <summary>
-        /// Type of the figure this implementation describes.
+        /// Initializes a new instance of the <see cref="TriangleDescriptor"/> class.
         /// </summary>
-        public FigureType FigureType => FigureType.Triangle;
+        public TriangleDescriptor()
+            : base(FigureType.Triangle, TriangleInfo.PropNames.All)
+        { }
 
-        /// <summary>
-        /// Required properties the client must specify.
-        /// </summary>
-        public string[] RequiredProps => TriangleInfo.PropNames.All;
-
-        /// <summary>
-        /// Validates values of the figure properties.
-        /// </summary>
-        /// <param name="figureProps">Figure properties.</param>
-        /// <returns>If no failures then empty or validation failures.</returns>
-        public ValidationResult ValidateProps(IDictionary<string, double> figureProps)
+        protected override ValidationResult ValidatePropsValues(IDictionary<string, double> figureProps)
         {
-            EnsureArg.HasItems(figureProps, nameof(figureProps));
-
             var data = new TriangleData
             {
                 Base = figureProps[TriangleInfo.PropNames.Base],
@@ -42,7 +31,7 @@ namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
 
             return validator.Validate(data);
         }
-        
+
         private class TriangleData
         {
             public double Base { get; init; }

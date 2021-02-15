@@ -3,7 +3,6 @@ using AutoFixture;
 using FigureMath.Apps.WebApi.Domain.Figures;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
 using FigureMath.Data.Enums;
-using FluentAssertions;
 using FluentValidation.Results;
 using Xunit;
 
@@ -32,18 +31,6 @@ namespace FigureMath.Apps.WebApi.Domain.Tests.Figures.Descriptors
 
             // Assert
             Assert.Equal(FigureType.Rectangle, actualFigureType);
-        }
-
-        [Fact]
-        public void RequiredProps_ShouldReturnRectangleInfoPropNamesAll_WhenCalled()
-        {
-            // Arrange
-            
-            // Act
-            string[] requiredProps = _descriptor.RequiredProps;
-
-            // Assert
-            requiredProps.Should().Equal(RectangleInfo.PropNames.All);
         }
 
         [Fact]
