@@ -1,4 +1,5 @@
 using System;
+using EnsureThat;
 using FigureMath.Data.Entities;
 using FigureMath.Data.Enums;
 using JetBrains.Annotations;
@@ -12,6 +13,8 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     [FigureImplementation(ImplementedFigureType)]
     public class CircleInfo : FigureInfo
     {
+        private double _radius;
+
         /// <summary>
         /// Implemented type of the figure.
         /// </summary>
@@ -38,7 +41,11 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// Radius of the circle.
         /// </summary>
         [UsedImplicitly]
-        public double Radius { get; set; }
+        public double Radius
+        {
+            get => _radius;
+            set => _radius = EnsureArg.IsGt(value, 0);
+        }
 
         /// <summary>
         /// Area of the circle.

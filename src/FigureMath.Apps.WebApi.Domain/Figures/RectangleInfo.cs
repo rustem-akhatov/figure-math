@@ -1,3 +1,4 @@
+using EnsureThat;
 using FigureMath.Data.Entities;
 using FigureMath.Data.Enums;
 using JetBrains.Annotations;
@@ -11,6 +12,9 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     [FigureImplementation(ImplementedFigureType)]
     public class RectangleInfo : FigureInfo
     {
+        private double _length;
+        private double _width;
+
         /// <summary>
         /// Implemented type of the figure.
         /// </summary>
@@ -38,13 +42,21 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// Length of the rectangle.
         /// </summary>
         [UsedImplicitly]
-        public double Length { get; set; }
+        public double Length
+        {
+            get => _length;
+            set => _length = EnsureArg.IsGt(value, 0);
+        }
 
         /// <summary>
         /// Width of the rectangle.
         /// </summary>
         [UsedImplicitly]
-        public double Width { get; set; }
+        public double Width
+        {
+            get => _width;
+            set => _width = EnsureArg.IsGt(value, 0);
+        }
 
         /// <summary>
         /// Area of the rectangle.

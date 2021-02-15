@@ -28,5 +28,39 @@ namespace FigureMath.Apps.WebApi.Domain.Tests.Figures
             // Assert
             Assert.Equal(expectedArea, actualArea);
         }
+
+        [Fact]
+        public void Radius_ShouldAcceptValue_WhenPositiveNumber()
+        {
+            // Arrange
+            var radius = _fixture.Create<double>();
+
+            // Act
+            var circle = new CircleInfo
+            {
+                Radius = radius
+            };
+
+            // Assert
+            Assert.Equal(radius, circle.Radius);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Radius_ShouldThrowException_WhenZeroOrNegativeNumber(int sign)
+        {
+            // Arrange
+            var radius = _fixture.Create<double>() * sign;
+
+            // Act
+            var circle = new CircleInfo();
+
+            Exception exception = Record.Exception(() => circle.Radius = radius);
+
+            // Assert
+            Assert.NotNull(exception);
+            Assert.IsType<ArgumentOutOfRangeException>(exception);
+        }
     }
 }

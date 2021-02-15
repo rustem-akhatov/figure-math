@@ -1,3 +1,4 @@
+using EnsureThat;
 using FigureMath.Data.Entities;
 using FigureMath.Data.Enums;
 using JetBrains.Annotations;
@@ -11,6 +12,9 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     [FigureImplementation(ImplementedFigureType)]
     public class TriangleInfo : FigureInfo
     {
+        private double _base;
+        private double _height;
+
         /// <summary>
         /// Implemented type of the figure.
         /// </summary>
@@ -33,18 +37,26 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
             Base = figure.FigureProps[PropNames.Base];
             Height = figure.FigureProps[PropNames.Height];
         }
-        
+
         /// <summary>
         /// Base of the triangle.
         /// </summary>
         [UsedImplicitly]
-        public double Base { get; set; }
-        
+        public double Base
+        {
+            get => _base;
+            set => _base = EnsureArg.IsGt(value, 0);
+        }
+
         /// <summary>
         /// Height of the triangle.
         /// </summary>
         [UsedImplicitly]
-        public double Height { get; set; }
+        public double Height
+        {
+            get => _height;
+            set => _height = EnsureArg.IsGt(value, 0);
+        }
 
         /// <summary>
         /// Area of the triangle.
