@@ -3,6 +3,7 @@ using System.Linq;
 using EnsureThat;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
 using FluentValidation;
+using FluentValidation.Results;
 using FluentValidation.Validators;
 using JetBrains.Annotations;
 
@@ -60,6 +61,17 @@ namespace FigureMath.Apps.WebApi.Models.Figures
             if (requiredProps.Count > 0)
             {
                 context.AddFailure($"These properties were not specified {ConvertPropsToLine(requiredProps)}. You must specify them.");
+                return;
+            }
+
+            ValidationResult propsValidationResult = figureDescriptor.ValidateProps(figureProps);
+
+            if (propsValidationResult.IsValid)
+                return;
+            
+            foreach (ValidationFailure failure in propsValidationResult.Errors)
+            {
+                context.AddFailure(new ValidationFailure($"{context.PropertyName}.{failure.PropertyName}", failure.ErrorMessage, failure.AttemptedValue));
             }
         }
 

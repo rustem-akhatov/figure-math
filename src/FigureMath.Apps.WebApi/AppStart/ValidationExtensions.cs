@@ -1,3 +1,4 @@
+using System.Text.Json;
 using EnsureThat;
 using FigureMath.Apps.WebApi.Properties;
 using FluentValidation;
@@ -18,6 +19,11 @@ namespace FigureMath.Apps.WebApi.AppStart
         {
             EnsureArg.IsNotNull(services, nameof(services));
 
+            var defaultPropertyNameResolver = ValidatorOptions.Global.PropertyNameResolver;
+
+            ValidatorOptions.Global.PropertyNameResolver =
+                (type, info, expression) => JsonNamingPolicy.CamelCase.ConvertName(defaultPropertyNameResolver(type, info, expression));
+            
             services.Scan(scan => scan
                 .FromAssembliesOf(typeof(AssemblyInfo))
                 .AddClasses(classes => classes.AssignableTo<IValidator>())

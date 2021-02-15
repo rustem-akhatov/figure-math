@@ -33,7 +33,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
         }
         
         [Fact]
-        public void Validate_ShouldReturnValid_WhenAllPropsFilled()
+        public void Validate_ShouldReturnValid_WhenAllPropsFilledCorrectly()
         {
             // Arrange
             var model = _fixture.Create<PostFigureModel>();
@@ -41,12 +41,43 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             _figureDescriptorMock
                 .SetupGet(descriptor => descriptor.RequiredProps)
                 .Returns(model.FigureProps.Keys.ToArray());
-            
+
+            _figureDescriptorMock
+                .Setup(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string, double>>()))
+                .Returns(new ValidationResult());
+
             // Act
             ValidationResult validationResult = _validator.Validate(model);
 
             // Assert
+            Assert.NotNull(validationResult);
             Assert.True(validationResult.IsValid);
+            
+            _figureDescriptorMock.Verify(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string,double>>()), Times.Once);
+        }
+        
+        [Fact]
+        public void Validate_ShouldReturnInvalid_WhenAllPropsFilledButIncorrectly()
+        {
+            // Arrange
+            var model = _fixture.Create<PostFigureModel>();
+
+            _figureDescriptorMock
+                .SetupGet(descriptor => descriptor.RequiredProps)
+                .Returns(model.FigureProps.Keys.ToArray());
+
+            _figureDescriptorMock
+                .Setup(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string, double>>()))
+                .Returns(new ValidationResult(_fixture.CreateMany<ValidationFailure>()));
+
+            // Act
+            ValidationResult validationResult = _validator.Validate(model);
+
+            // Assert
+            Assert.NotNull(validationResult);
+            Assert.False(validationResult.IsValid);
+            
+            _figureDescriptorMock.Verify(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string,double>>()), Times.Once);
         }
 
         [Fact]
@@ -66,6 +97,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             ValidationResult validationResult = _validator.Validate(model);
 
             // Assert
+            Assert.NotNull(validationResult);
             Assert.False(validationResult.IsValid);
             Assert.Single(validationResult.Errors);
             
@@ -93,12 +125,15 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             ValidationResult validationResult = _validator.Validate(model);
 
             // Assert
+            Assert.NotNull(validationResult);
             Assert.False(validationResult.IsValid);
             Assert.Single(validationResult.Errors);
 
             ValidationFailure failure = validationResult.Errors[0];
             
             Assert.All(requiredProps, prop => Assert.Contains(prop, failure.ErrorMessage));
+            
+            _figureDescriptorMock.Verify(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string,double>>()), Times.Never);
         }
 
         [Fact]
@@ -117,12 +152,15 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             ValidationResult validationResult = _validator.Validate(model);
 
             // Assert
+            Assert.NotNull(validationResult);
             Assert.False(validationResult.IsValid);
             Assert.Single(validationResult.Errors);
 
             ValidationFailure failure = validationResult.Errors[0];
             
             Assert.All(requiredProps, prop => Assert.Contains(prop, failure.ErrorMessage));
+            
+            _figureDescriptorMock.Verify(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string,double>>()), Times.Never);
         }
 
         [Fact]
@@ -146,12 +184,15 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             ValidationResult validationResult = _validator.Validate(model);
 
             // Assert
+            Assert.NotNull(validationResult);
             Assert.False(validationResult.IsValid);
             Assert.Single(validationResult.Errors);
 
             ValidationFailure failure = validationResult.Errors[0];
             
             Assert.All(requiredProps.Skip(takePropsCount), prop => Assert.Contains(prop, failure.ErrorMessage));
+            
+            _figureDescriptorMock.Verify(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string,double>>()), Times.Never);
         }
     }
 }

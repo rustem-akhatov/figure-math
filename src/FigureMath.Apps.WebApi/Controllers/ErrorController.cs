@@ -32,7 +32,6 @@ namespace FigureMath.Apps.WebApi.Controllers
         /// <summary>
         /// Handles all errors.
         /// </summary>
-        /// <returns></returns>
         [Route("unknown")]
         public IActionResult Unknown()
         {
