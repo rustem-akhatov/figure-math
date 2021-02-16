@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Data.Enums;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain.Tests.Services
 {
     public class FigureDescriptorProviderTests
     {

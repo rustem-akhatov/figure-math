@@ -1,13 +1,14 @@
 using System;
 using AutoFixture;
 using FigureMath.Apps.WebApi.Domain.Figures;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Data.Entities;
 using FigureMath.Data.Enums;
 using FigureMath.Data.Testing.AutoFixture.Extensions;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures
+namespace FigureMath.Apps.WebApi.Domain.Tests.Services
 {
     public class FigureInfoFactoryTests
     {

@@ -92,8 +92,8 @@ namespace FigureMath.Common.AspNet.Logging
             }
             else
             {
-                var internalServerError = HttpStatusCode.InternalServerError;
-                
+                const HttpStatusCode internalServerError = HttpStatusCode.InternalServerError;
+
                 stringBuilder.Append($"Request completed with an unhandled exception {request.Method} {request.Path} {(int)internalServerError} ({internalServerError})");
             }
             

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using EnsureThat;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FluentValidation;
 using FluentValidation.Results;
 using FluentValidation.Validators;

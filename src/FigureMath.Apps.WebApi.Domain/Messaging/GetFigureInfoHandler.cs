@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using FigureMath.Apps.WebApi.Domain.Figures;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Common.Data.Extensions;
 using FigureMath.Data;
 using FigureMath.Data.Entities;

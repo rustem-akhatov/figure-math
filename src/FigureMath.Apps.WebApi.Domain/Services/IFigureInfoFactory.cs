@@ -1,6 +1,7 @@
+using FigureMath.Apps.WebApi.Domain.Figures;
 using FigureMath.Data.Entities;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures
+namespace FigureMath.Apps.WebApi.Domain.Services
 {
     /// <summary>
     /// Interface of the factory to create a specific instance of the class derived from <see cref="FigureInfo"/>

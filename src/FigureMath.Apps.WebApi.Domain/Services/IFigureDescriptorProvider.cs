@@ -1,6 +1,7 @@
+using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
 using FigureMath.Data.Enums;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain.Services
 {
     /// <summary>
     /// Can be used to get an instance of <see cref="IFigureDescriptor"/> for the specific <see cref="FigureType"/>.

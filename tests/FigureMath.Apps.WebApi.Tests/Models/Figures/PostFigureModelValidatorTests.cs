@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Apps.WebApi.Models.Figures;
 using FigureMath.Data.Enums;
 using FluentValidation.Results;

@@ -1,6 +1,6 @@
 using EnsureThat;
-using FigureMath.Apps.WebApi.Domain.Figures;
 using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
+using FigureMath.Apps.WebApi.Domain.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

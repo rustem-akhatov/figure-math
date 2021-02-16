@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoFixture;
 using FigureMath.Apps.WebApi.Domain.Figures;
 using FigureMath.Apps.WebApi.Domain.Messaging;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Common.Data.Exceptions;
 using FigureMath.Data;
 using FigureMath.Data.Entities;

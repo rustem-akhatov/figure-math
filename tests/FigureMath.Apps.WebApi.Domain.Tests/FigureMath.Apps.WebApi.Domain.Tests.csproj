@@ -28,16 +28,4 @@
       <ProjectReference Include="..\FigureMath.Data.Testing\FigureMath.Data.Testing.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Figures\CircleInfoTests.cs">
-        <DependentUpon>FigureInfoTests.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\RectangleInfoTests.cs">
-        <DependentUpon>FigureInfoTests.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\TriangleInfoTests.cs">
-        <DependentUpon>FigureInfoTests.cs</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
 </Project>

@@ -23,35 +23,14 @@
       <Compile Update="Messaging\GetFigureInfoHandler.cs">
         <DependentUpon>GetFigureInfoRequest.cs</DependentUpon>
       </Compile>
-      <Compile Update="Figures\Descriptors\CircleDescriptor.cs">
-        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\Descriptors\FigureDescriptorProvider.cs">
+      <Compile Update="Services\FigureDescriptorProvider.cs">
         <DependentUpon>IFigureDescriptorProvider.cs</DependentUpon>
       </Compile>
-      <Compile Update="Figures\Descriptors\TriangleDescriptor.cs">
-        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\TriangleInfo.cs">
-        <DependentUpon>FigureInfo.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\CircleInfo.cs">
-        <DependentUpon>FigureInfo.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\RectangleInfo.cs">
-        <DependentUpon>FigureInfo.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\Descriptors\RectangleDescriptor.cs">
-        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\FigureInfoFactory.cs">
+      <Compile Update="Services\FigureInfoFactory.cs">
         <DependentUpon>IFigureInfoFactory.cs</DependentUpon>
       </Compile>
-      <Compile Update="Figures\FigureInfoTypeProvider.cs">
+      <Compile Update="Services\FigureInfoTypeProvider.cs">
         <DependentUpon>IFigureInfoTypeProvider.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Figures\Descriptors\FigureDescriptorBase.cs">
-        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

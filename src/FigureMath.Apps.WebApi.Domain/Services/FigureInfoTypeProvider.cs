@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using FigureMath.Apps.WebApi.Domain.Annotations;
+using FigureMath.Apps.WebApi.Domain.Figures;
 using FigureMath.Data.Enums;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures
+namespace FigureMath.Apps.WebApi.Domain.Services
 {
     /// <summary>
     /// Implementation of the provider to get <see cref="Type"/> that implements figure.

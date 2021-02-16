@@ -1,11 +1,12 @@
 using System;
 using System.Reflection;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures;
+using FigureMath.Apps.WebApi.Domain.Annotations;
+using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Data.Enums;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures
+namespace FigureMath.Apps.WebApi.Domain.Tests.Services
 {
     public class FigureInfoTypeProviderTests
     {
