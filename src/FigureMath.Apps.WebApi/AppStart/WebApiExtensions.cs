@@ -36,7 +36,6 @@ namespace FigureMath.Apps.WebApi.AppStart
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddFluentValidation();
-            
 
             services.ReplaceDefaultProblemsDetailsFactory();
         }
