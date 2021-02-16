@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 using EnsureThat;
 using FigureMath.Apps.Hosting;
 using FigureMath.Common.Data.Exceptions;
@@ -46,27 +45,27 @@ namespace FigureMath.Apps.WebApi.Controllers
             
             bool showExceptionInfo = _env.IsDevelopment() || _env.IsDockerDesktop();
 
-            (HttpStatusCode statusCode, string message) = GetMessageAndHttpStatusCode(errorContext.Error);
+            (int statusCode, string message) = GetMessageAndHttpStatusCode(errorContext.Error);
             
-            if ((int)statusCode >= StatusCodes.Status500InternalServerError)
+            if (statusCode >= StatusCodes.Status500InternalServerError)
             {
                 _logger.LogError(errorContext.Error, $"Exception on {Request.Method} {errorContext.Path}");    
             }
 
             return showExceptionInfo 
-                ? Problem(statusCode: (int)statusCode, title: errorContext.Error.Message, detail: errorContext.Error.StackTrace)
-                : Problem(statusCode: (int)statusCode, title: message);
+                ? Problem(statusCode: statusCode, title: errorContext.Error.Message, detail: errorContext.Error.StackTrace)
+                : Problem(statusCode: statusCode, title: message);
         }
 
-        private static (HttpStatusCode, string) GetMessageAndHttpStatusCode(Exception exception)
+        private static (int, string) GetMessageAndHttpStatusCode(Exception exception)
         {
             // ReSharper disable once ConvertSwitchStatementToSwitchExpression
             switch (exception)
             {
                 case EntityNotFoundException entityNotFoundException:
-                    return (HttpStatusCode.NotFound, entityNotFoundException.Message);
+                    return (StatusCodes.Status404NotFound, entityNotFoundException.Message);
                 default:
-                    return (HttpStatusCode.InternalServerError, null);
+                    return (StatusCodes.Status500InternalServerError, null);
             }
         }
     }

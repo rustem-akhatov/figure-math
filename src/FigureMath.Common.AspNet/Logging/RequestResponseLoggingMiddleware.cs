@@ -50,7 +50,7 @@ namespace FigureMath.Common.AspNet.Logging
 
             (string responseBody, ExceptionDispatchInfo exceptionInfo) = await _next.TryRunAsync(context);
             
-            string completeLogMessage = GetCompleteLogMessage(request, context.Response, responseBody);
+            string completeLogMessage = GetCompleteLogMessage(request, context.Response, responseBody, exceptionInfo?.SourceException);
             
             _logger.LogInformation(completeLogMessage);
 
@@ -61,7 +61,7 @@ namespace FigureMath.Common.AspNet.Logging
         {
             var stringBuilder = new StringBuilder();
             
-            stringBuilder.Append($"Start {request.Method} {request.Path}{request.QueryString} ({request.ContentType})");
+            stringBuilder.Append($"Request started {request.Method} {request.Path}{request.QueryString} ({request.ContentType})");
 
             // ReSharper disable once ConstantConditionalAccessQualifier
             string mimeType = request.ContentType?.Split(";")[0];
@@ -81,14 +81,23 @@ namespace FigureMath.Common.AspNet.Logging
             return stringBuilder.ToString();
         }
         
-        private static string GetCompleteLogMessage(HttpRequest request, HttpResponse response, string responseBody)
+        private static string GetCompleteLogMessage(HttpRequest request, HttpResponse response, string responseBody, Exception exception)
         {
             var stringBuilder = new StringBuilder();
-
-            var statusCodeText = Enum.GetName(typeof(HttpStatusCode), response.StatusCode) ?? "Unknown";
             
-            stringBuilder.Append($"Complete {request.Method} {request.Path} {response.StatusCode} ({statusCodeText})");
-
+            if (exception == null)
+            {
+                var statusCodeText = Enum.GetName(typeof(HttpStatusCode), response.StatusCode) ?? "Unknown";
+                
+                stringBuilder.Append($"Request completed {request.Method} {request.Path} {response.StatusCode} ({statusCodeText})");
+            }
+            else
+            {
+                var internalServerError = HttpStatusCode.InternalServerError;
+                
+                stringBuilder.Append($"Request completed with an exception {request.Method} {request.Path} {(int)internalServerError} ({internalServerError})");
+            }
+            
             if (!string.IsNullOrEmpty(response.ContentType))
             {
                 string mimeType = response.ContentType.Split(";")[0];

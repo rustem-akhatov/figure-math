@@ -41,12 +41,16 @@ namespace FigureMath.Apps.WebApi
 
             app.UseRequestResponseLogging();
             
-            app.UseExceptionHandler("/error/unknown");
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandlingPath = "/error/unknown",
+                AllowStatusCode404Response = true
+            });
 
             app.UseRouting();
-
-            app.UseSwaggerPackage();
             
+            app.UseSwaggerPackage();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
