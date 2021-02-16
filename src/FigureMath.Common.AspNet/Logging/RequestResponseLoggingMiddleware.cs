@@ -16,7 +16,6 @@ namespace FigureMath.Common.AspNet.Logging
     /// <summary>
     /// A middleware for logging HTTP-requests and HTTP-responses. Can affect performance.
     /// </summary>
-    [UsedImplicitly]
     public class RequestResponseLoggingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -95,7 +94,7 @@ namespace FigureMath.Common.AspNet.Logging
             {
                 var internalServerError = HttpStatusCode.InternalServerError;
                 
-                stringBuilder.Append($"Request completed with an exception {request.Method} {request.Path} {(int)internalServerError} ({internalServerError})");
+                stringBuilder.Append($"Request completed with an unhandled exception {request.Method} {request.Path} {(int)internalServerError} ({internalServerError})");
             }
             
             if (!string.IsNullOrEmpty(response.ContentType))

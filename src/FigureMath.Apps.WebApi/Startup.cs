@@ -37,6 +37,8 @@ namespace FigureMath.Apps.WebApi
         {
             EnsureArg.IsNotNull(app, nameof(app));
 
+            app.UseUnhandledExceptionLogging();
+            
             app.UseActivityId();
 
             app.UseRequestResponseLogging();

@@ -38,5 +38,17 @@ namespace FigureMath.Common.AspNet.Logging
 
             return app.UseMiddleware<RequestResponseLoggingMiddleware>();
         }
+
+        /// <summary>
+        /// Adds a <see cref="UnhandledExceptionLoggingMiddleware"/> middleware to the specified <see cref="IApplicationBuilder"/>.
+        /// </summary>
+        /// <param name="app">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
+        /// <returns>A reference to this instance after the operation has completed.</returns>
+        public static IApplicationBuilder UseUnhandledExceptionLogging(this IApplicationBuilder app)
+        {
+            EnsureArg.IsNotNull(app, nameof(app));
+
+            return app.UseMiddleware<UnhandledExceptionLoggingMiddleware>();
+        }
     }
 }
