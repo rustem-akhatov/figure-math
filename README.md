@@ -96,3 +96,4 @@ That's all. A new figure is now supported.
 
 - [ ] Add validation for MediatR requests.
 - [ ] Add unit-tests on Common libraries and classes using reflection.
+- [ ] Create DSL to describe figures instead of code creation.
