@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using EnsureThat;
 using Microsoft.AspNetCore.Http;
 
 namespace FigureMath.Common.AspNet.Http
@@ -20,6 +21,9 @@ namespace FigureMath.Common.AspNet.Http
         /// <returns>Tuple of HTTP-response body as a string and captured exception.</returns>
         public static async Task<(string, ExceptionDispatchInfo)> TryRunAsync(this RequestDelegate next, HttpContext context)
         {
+            EnsureArg.IsNotNull(next, nameof(next));
+            EnsureArg.IsNotNull(context, nameof(context));
+            
             Stream originalStream = context.Response.Body;
             
             await using var memoryStream = new MemoryStream();
