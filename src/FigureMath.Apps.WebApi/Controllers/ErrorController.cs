@@ -4,7 +4,6 @@ using EnsureThat;
 using FigureMath.Apps.Hosting;
 using FigureMath.Common.Data.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
@@ -23,7 +22,7 @@ namespace FigureMath.Apps.WebApi.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorController"/> class.
         /// </summary>
-        /// <param name="env">An instance of <see cref="IWebHostEnvironment"/>.</param>
+        /// <param name="env">An instance of <see cref="IHostEnvironment"/>.</param>
         public ErrorController(IHostEnvironment env)
         {
             _env = EnsureArg.IsNotNull(env, nameof(env));
