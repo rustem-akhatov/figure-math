@@ -32,18 +32,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Validators\CirclePropsValidator.cs">
-        <DependentUpon>IFigurePropsValidator.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Validators\TrianglePropsValidator.cs">
-        <DependentUpon>IFigurePropsValidator.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Validation\FigurePropsValidatorProvider.cs">
-        <DependentUpon>IFigurePropsValidatorProvider.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Validation\FigurePropsValidationHelper.cs">
-        <DependentUpon>IFigurePropsValidationHelper.cs</DependentUpon>
-      </Compile>
       <Compile Update="Models\Figures\PostFigureModelValidator.cs">
         <DependentUpon>PostFigureModel.cs</DependentUpon>
       </Compile>
