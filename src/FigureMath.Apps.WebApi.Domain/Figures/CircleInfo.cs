@@ -10,7 +10,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     /// <summary>
     /// Represents the concrete implementation of the figure - Circle.
     /// </summary>
-    [UsedImplicitly]
     [FigureImplementation(ImplementedFigureType)]
     public class CircleInfo : FigureInfo
     {
@@ -32,6 +31,7 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// Initializes a new instance of the <see cref="CircleInfo"/> class.
         /// </summary>
         /// <param name="figure">Figure data.</param>
+        [UsedImplicitly]
         public CircleInfo(Figure figure)
             : base(ImplementedFigureType, figure)
         {
@@ -41,7 +41,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// <summary>
         /// Radius of the circle.
         /// </summary>
-        [UsedImplicitly]
         public double Radius
         {
             get => _radius;

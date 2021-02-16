@@ -9,7 +9,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     /// <summary>
     /// Represents the concrete implementation of the figure - Triangle.
     /// </summary>
-    [UsedImplicitly]
     [FigureImplementation(ImplementedFigureType)]
     public class TriangleInfo : FigureInfo
     {
@@ -32,6 +31,7 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// Initializes a new instance of the <see cref="TriangleInfo"/> class.
         /// </summary>
         /// <param name="figure">Figure data.</param>
+        [UsedImplicitly]
         public TriangleInfo(Figure figure)
             : base(ImplementedFigureType, figure)
         {
@@ -42,7 +42,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// <summary>
         /// Base of the triangle.
         /// </summary>
-        [UsedImplicitly]
         public double Base
         {
             get => _base;
@@ -52,7 +51,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// <summary>
         /// Height of the triangle.
         /// </summary>
-        [UsedImplicitly]
         public double Height
         {
             get => _height;

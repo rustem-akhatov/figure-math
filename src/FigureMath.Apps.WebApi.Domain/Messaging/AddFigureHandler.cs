@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using EnsureThat;
 using FigureMath.Data;
 using FigureMath.Data.Entities;
-using JetBrains.Annotations;
 using MediatR;
 
 namespace FigureMath.Apps.WebApi.Domain.Messaging
@@ -12,7 +11,6 @@ namespace FigureMath.Apps.WebApi.Domain.Messaging
     /// <summary>
     /// Handler for <see cref="AddFigureRequest"/>.
     /// </summary>
-    [UsedImplicitly]
     public class AddFigureHandler : IRequestHandler<AddFigureRequest, Figure>
     {
         private readonly IFigureMathDbContext _dbContext;

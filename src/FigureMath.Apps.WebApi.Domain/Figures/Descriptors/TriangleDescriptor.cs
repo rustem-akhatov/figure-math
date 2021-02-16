@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using FigureMath.Data.Enums;
 using FluentValidation;
 using FluentValidation.Results;
-using JetBrains.Annotations;
 
 namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
 {
     /// <summary>
     /// Describes a Triangle.
     /// </summary>
-    [UsedImplicitly]
     public class TriangleDescriptor : FigureDescriptorBase
     {
         /// <summary>

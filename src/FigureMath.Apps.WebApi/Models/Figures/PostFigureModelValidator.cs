@@ -5,14 +5,12 @@ using FigureMath.Apps.WebApi.Domain.Services;
 using FluentValidation;
 using FluentValidation.Results;
 using FluentValidation.Validators;
-using JetBrains.Annotations;
 
 namespace FigureMath.Apps.WebApi.Models.Figures
 {
     /// <summary>
     /// Validator for the <see cref="PostFigureModel"/>.
     /// </summary>
-    [UsedImplicitly]
     public class PostFigureModelValidator : AbstractValidator<PostFigureModel>
     {
         private readonly IFigureDescriptorProvider _figureDescriptorProvider;

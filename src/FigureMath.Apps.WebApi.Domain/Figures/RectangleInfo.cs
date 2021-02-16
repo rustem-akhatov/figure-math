@@ -9,7 +9,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
     /// <summary>
     /// Represents the concrete implementation of the figure - Rectangle.
     /// </summary>
-    [UsedImplicitly]
     [FigureImplementation(ImplementedFigureType)]
     public class RectangleInfo : FigureInfo
     {
@@ -32,6 +31,7 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// Initializes a new instance of the <see cref="RectangleInfo"/> class.
         /// </summary>
         /// <param name="figure">Figure data.</param>
+        [UsedImplicitly]
         public RectangleInfo(Figure figure)
             : base(ImplementedFigureType, figure)
         {
@@ -42,7 +42,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// <summary>
         /// Length of the rectangle.
         /// </summary>
-        [UsedImplicitly]
         public double Length
         {
             get => _length;
@@ -52,7 +51,6 @@ namespace FigureMath.Apps.WebApi.Domain.Figures
         /// <summary>
         /// Width of the rectangle.
         /// </summary>
-        [UsedImplicitly]
         public double Width
         {
             get => _width;

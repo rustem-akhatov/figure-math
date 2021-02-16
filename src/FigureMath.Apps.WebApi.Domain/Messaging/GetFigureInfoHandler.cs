@@ -6,7 +6,6 @@ using FigureMath.Apps.WebApi.Domain.Services;
 using FigureMath.Common.Data.Extensions;
 using FigureMath.Data;
 using FigureMath.Data.Entities;
-using JetBrains.Annotations;
 using MediatR;
 
 namespace FigureMath.Apps.WebApi.Domain.Messaging
@@ -14,7 +13,6 @@ namespace FigureMath.Apps.WebApi.Domain.Messaging
     /// <summary>
     /// Handler for <see cref="GetFigureInfoRequest"/>.
     /// </summary>
-    [UsedImplicitly]
     public class GetFigureInfoHandler : IRequestHandler<GetFigureInfoRequest, FigureInfo>
     {
         private readonly IFigureMathDbContext _dbContext;

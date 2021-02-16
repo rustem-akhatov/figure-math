@@ -1,5 +1,4 @@
 using EnsureThat;
-using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -9,7 +8,6 @@ namespace FigureMath.Apps.WebApi.Filters
     /// <summary>
     /// Ensures model is valid.
     /// </summary>
-    [UsedImplicitly]
     public class CheckModelStateFilter : IActionFilter
     {
         /// <summary>
