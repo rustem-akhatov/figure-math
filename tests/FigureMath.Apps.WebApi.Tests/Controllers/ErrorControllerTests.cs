@@ -3,11 +3,13 @@ using AutoFixture;
 using FigureMath.Apps.Hosting;
 using FigureMath.Apps.WebApi.Controllers;
 using FigureMath.Common.Data.Exceptions;
+using FigureMath.Testing.Moq.Extensions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
@@ -18,6 +20,7 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
         private readonly Fixture _fixture;
         
         private readonly Mock<IHostEnvironment> _hostEnvironmentMock;
+        private readonly Mock<ILogger<ErrorController>> _loggerMock;
         
         private readonly Mock<IExceptionHandlerPathFeature> _exceptionHandlerPathFeatureMock;
         
@@ -28,6 +31,7 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             _fixture = new Fixture();
             
             _hostEnvironmentMock = new Mock<IHostEnvironment>();
+            _loggerMock = new Mock<ILogger<ErrorController>>();
 
             _exceptionHandlerPathFeatureMock = new Mock<IExceptionHandlerPathFeature>();
 
@@ -35,11 +39,16 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             featureCollection.Set(_exceptionHandlerPathFeatureMock.Object);
 
             var httpContextMock = new Mock<HttpContext>();
+            
             httpContextMock
                 .SetupGet(context => context.Features)
                 .Returns(featureCollection);
 
-            _controller = new ErrorController(_hostEnvironmentMock.Object)
+            httpContextMock
+                .SetupGet(context => context.Request)
+                .Returns(Mock.Of<HttpRequest>());
+            
+            _controller = new ErrorController(_hostEnvironmentMock.Object, _loggerMock.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -59,6 +68,8 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             // Assert
             Assert.NotNull(actionResult);
             Assert.IsType<NotFoundResult>(actionResult);
+            
+            _loggerMock.VerifyLogged(LogLevel.Error, Times.Never);
         }
 
         [Fact]
@@ -78,6 +89,8 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
 
             var objectResult = (ObjectResult)actionResult;
             Assert.Equal(StatusCodes.Status404NotFound, objectResult.StatusCode);
+            
+            _loggerMock.VerifyLogged(LogLevel.Error, Times.Never);
         }
         
         [Fact]
@@ -97,6 +110,8 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
 
             var objectResult = (ObjectResult)actionResult;
             Assert.Equal(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
+            
+            _loggerMock.VerifyLogged(LogLevel.Error, Times.Once);
         }
 
         [Theory]

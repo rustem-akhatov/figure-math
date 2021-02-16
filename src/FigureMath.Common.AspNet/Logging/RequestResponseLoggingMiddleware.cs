@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using EnsureThat;
@@ -47,18 +48,13 @@ namespace FigureMath.Common.AspNet.Logging
             
             _logger.LogInformation(startLogMessage);
 
-            try
-            {
-                string responseBody = await _next.RunAndReadResponseBodyAsync(context);
-                
-                string completeLogMessage = GetCompleteLogMessage(request, context.Response, responseBody);
-                
-                _logger.LogInformation(completeLogMessage);
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(GetLogLevel(context.Response.StatusCode), ex, GetBeggingOfCompleteLogMessage(context));
-            }
+            (string responseBody, ExceptionDispatchInfo exceptionInfo) = await _next.TryRunAsync(context);
+            
+            string completeLogMessage = GetCompleteLogMessage(request, context.Response, responseBody);
+            
+            _logger.LogInformation(completeLogMessage);
+
+            exceptionInfo?.Throw();
         }
 
         private static async Task<string> GetStartLogMessageAsync(HttpRequest request)
@@ -89,7 +85,9 @@ namespace FigureMath.Common.AspNet.Logging
         {
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.Append(GetBeggingOfCompleteLogMessage(request, response));
+            var statusCodeText = Enum.GetName(typeof(HttpStatusCode), response.StatusCode) ?? "Unknown";
+            
+            stringBuilder.Append($"Complete {request.Method} {request.Path} {response.StatusCode} ({statusCodeText})");
 
             if (!string.IsNullOrEmpty(response.ContentType))
             {
@@ -107,23 +105,6 @@ namespace FigureMath.Common.AspNet.Logging
             }
 
             return stringBuilder.ToString();
-        }
-
-        private static string GetBeggingOfCompleteLogMessage(HttpContext context)
-        {
-            return GetBeggingOfCompleteLogMessage(context.Request, context.Response);
-        }
-
-        private static string GetBeggingOfCompleteLogMessage(HttpRequest request, HttpResponse response)
-        {
-            var statusCodeText = Enum.GetName(typeof(HttpStatusCode), response.StatusCode) ?? "Unknown";
-
-            return $"Complete {request.Method} {request.Path} {response.StatusCode} ({statusCodeText})";
-        }
-        
-        private static LogLevel GetLogLevel(int statusCode)
-        {
-            return statusCode >= 500 ? LogLevel.Error : LogLevel.Information;
         }
     }
 }

@@ -4,8 +4,10 @@ using EnsureThat;
 using FigureMath.Apps.Hosting;
 using FigureMath.Common.Data.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace FigureMath.Apps.WebApi.Controllers
 {
@@ -18,14 +20,17 @@ namespace FigureMath.Apps.WebApi.Controllers
     public class ErrorController : ControllerBase
     {
         private readonly IHostEnvironment _env;
+        private readonly ILogger<ErrorController> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ErrorController"/> class.
         /// </summary>
         /// <param name="env">An instance of <see cref="IHostEnvironment"/>.</param>
-        public ErrorController(IHostEnvironment env)
+        /// <param name="logger">An instance of <see cref="ILogger{ErrorController}"/>.</param>
+        public ErrorController(IHostEnvironment env, ILogger<ErrorController> logger)
         {
             _env = EnsureArg.IsNotNull(env, nameof(env));
+            _logger = EnsureArg.IsNotNull(logger, nameof(logger));
         }
         
         /// <summary>
@@ -34,17 +39,22 @@ namespace FigureMath.Apps.WebApi.Controllers
         [Route("unknown")]
         public IActionResult Unknown()
         {
-            var context = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            var errorContext = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            if (context?.Error == null)
+            if (errorContext?.Error == null)
                 return NotFound();
             
             bool showExceptionInfo = _env.IsDevelopment() || _env.IsDockerDesktop();
 
-            (HttpStatusCode statusCode, string message) = GetMessageAndHttpStatusCode(context.Error);
+            (HttpStatusCode statusCode, string message) = GetMessageAndHttpStatusCode(errorContext.Error);
+            
+            if ((int)statusCode >= StatusCodes.Status500InternalServerError)
+            {
+                _logger.LogError(errorContext.Error, $"Exception on {Request.Method} {errorContext.Path}");    
+            }
 
             return showExceptionInfo 
-                ? Problem(statusCode: (int)statusCode, title: context.Error.Message, detail: context.Error.StackTrace)
+                ? Problem(statusCode: (int)statusCode, title: errorContext.Error.Message, detail: errorContext.Error.StackTrace)
                 : Problem(statusCode: (int)statusCode, title: message);
         }
 

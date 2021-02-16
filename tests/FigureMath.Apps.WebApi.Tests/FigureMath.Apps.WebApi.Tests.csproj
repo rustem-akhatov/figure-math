@@ -25,6 +25,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\FigureMath.Apps.WebApi\FigureMath.Apps.WebApi.csproj" />
       <ProjectReference Include="..\FigureMath.Data.Testing\FigureMath.Data.Testing.csproj" />
+      <ProjectReference Include="..\FigureMath.Testing\FigureMath.Testing.csproj" />
     </ItemGroup>
 
 </Project>

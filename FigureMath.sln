@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureMath.Data.Testing", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureMath.Apps.WebApi.Tests", "tests\FigureMath.Apps.WebApi.Tests\FigureMath.Apps.WebApi.Tests.csproj", "{8A3529E9-61E6-4353-B03E-00A027A16E39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FigureMath.Testing", "tests\FigureMath.Testing\FigureMath.Testing.csproj", "{A3186B1F-6785-48F3-BAA1-CA936EA250AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,7 @@ Global
 		{D4546147-4F98-4AF8-B2F5-9DAD1EAB9251} = {E09E8893-5D9D-49D5-99C0-807A5A82D95B}
 		{C394329A-2CA9-428F-A34A-66063148B22B} = {9F2DA285-3107-42B8-9370-0F921B2CB812}
 		{8A3529E9-61E6-4353-B03E-00A027A16E39} = {B3C7E33A-3228-411D-8098-83840E2A4ABB}
+		{A3186B1F-6785-48F3-BAA1-CA936EA250AE} = {61B0722A-8A9D-4011-9C50-2B0284833C38}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D0FFAE63-5A75-4CDD-88A4-56B51D75329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -113,5 +116,9 @@ Global
 		{8A3529E9-61E6-4353-B03E-00A027A16E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A3529E9-61E6-4353-B03E-00A027A16E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A3529E9-61E6-4353-B03E-00A027A16E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3186B1F-6785-48F3-BAA1-CA936EA250AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3186B1F-6785-48F3-BAA1-CA936EA250AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3186B1F-6785-48F3-BAA1-CA936EA250AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3186B1F-6785-48F3-BAA1-CA936EA250AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
