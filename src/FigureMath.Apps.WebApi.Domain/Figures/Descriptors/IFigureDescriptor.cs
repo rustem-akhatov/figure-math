@@ -5,7 +5,7 @@ using FluentValidation.Results;
 namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
 {
     /// <summary>
-    /// Describes a concrete figure. It's type and required properties (at this moment to calculate area of the figure).
+    /// Describes a concrete figure. It's type and method to validate properties.
     /// </summary>
     public interface IFigureDescriptor
     {
