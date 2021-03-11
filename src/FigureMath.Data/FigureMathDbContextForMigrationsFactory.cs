@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace FigureMath.Data
 {
-    // EF Core uses this class at design time to access the DbContext.
+    // EF uses this class at design time to access the DbContext.
     [UsedImplicitly]
     public class FigureMathDbContextForMigrationsFactory : IDesignTimeDbContextFactory<FigureMathDbContext>
     {
         /// <summary>
         /// Creates a new instance of a derived context.
         /// </summary>
-        /// <param name="args"> Arguments provided by the design-time service. </param>
-        /// <returns> An instance of <see cref="FigureMathDbContext"/>.</returns>
+        /// <param name="args">Arguments provided by the design-time service. </param>
+        /// <returns>An instance of <see cref="FigureMathDbContext"/>.</returns>
         public FigureMathDbContext CreateDbContext(string[] args)
         {
             // Connection string can be configured via Environment Variable EF_CONNECTION_STRING.

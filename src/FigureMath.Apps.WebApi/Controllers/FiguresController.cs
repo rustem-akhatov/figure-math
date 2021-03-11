@@ -19,7 +19,7 @@ namespace FigureMath.Apps.WebApi.Controllers
         private readonly IMediator _mediator;
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="ErrorController"/> class.
+        /// Initializes a new instance of the <see cref="FiguresController"/> class.
         /// </summary>
         /// <param name="mediator">An instance of <see cref="IMediator"/>.</param>
         public FiguresController(IMediator mediator)

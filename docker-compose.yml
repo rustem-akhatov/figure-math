@@ -10,7 +10,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=DockerDesktop
     ports:
-    - 9293:80
+      - 9293:80
     depends_on:
       - postgres
   

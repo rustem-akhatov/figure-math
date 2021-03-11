@@ -42,7 +42,7 @@ namespace FigureMath.Common.AspNet.Http
             }
 
             // TODO: It's necessary to consider ContentType and maximum length.
-            // For logging is only needed MediaTypeNames.Application.TextLike responses and 2048 bytes in maximum length.
+            // For logging is only needed MediaTypeNames.Application.TextLike responses and 2048 maximum length.
             // See method RequestResponseLoggingMiddleware.GetCompleteLogMessage to solve this problem.
                 
             string body = await ReadAllTextAsync(memoryStream, Encoding.UTF8);
