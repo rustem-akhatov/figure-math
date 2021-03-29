@@ -78,7 +78,7 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             // Arrange
             _exceptionHandlerPathFeatureMock
                 .SetupGet(feature => feature.Error)
-                .Returns(new EntityNotFoundException());
+                .Returns(_fixture.Create<EntityNotFoundException>());
 
             // Act
             IActionResult actionResult = _controller.Unknown();
