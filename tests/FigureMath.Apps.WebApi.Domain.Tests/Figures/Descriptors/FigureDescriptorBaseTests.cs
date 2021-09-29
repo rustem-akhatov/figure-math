@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using FluentValidation.Results;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain.Tests
 {
     public class FigureDescriptorBaseTests
     {

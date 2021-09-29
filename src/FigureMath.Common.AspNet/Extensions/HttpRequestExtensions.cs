@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.AspNetCore.Http;
 
-namespace FigureMath.Common.AspNet.Http
+namespace FigureMath.Common.AspNet
 {
     /// <summary>
     /// Extension methods for <see cref="HttpRequest"/>.

@@ -1,8 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Filters;
-using FigureMath.Common.AspNet.Infrastructure;
+using FigureMath.Common.AspNet.ExceptionHandling;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +17,7 @@ namespace FigureMath.Apps.WebApi.AppStart
         /// Adds and configures WebApi services (controllers, JSON, etc.) to <paramref name="services"/>. 
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-        public static void ConfigureWebApi(this IServiceCollection services)
+        public static IServiceCollection AddWebApiServices(this IServiceCollection services)
         {
             EnsureArg.IsNotNull(services, nameof(services));
             
@@ -37,7 +36,9 @@ namespace FigureMath.Apps.WebApi.AppStart
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddFluentValidation();
 
-            services.ReplaceDefaultProblemsDetailsFactory();
+            return services
+                .ReplaceDefaultProblemsDetailsFactory()
+                .AddSingleton<IProblemInfoFactory, DefaultProblemInfoFactory>();
         }
     }
 }

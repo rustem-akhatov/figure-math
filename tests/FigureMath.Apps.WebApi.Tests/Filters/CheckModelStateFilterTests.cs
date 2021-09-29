@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Filters;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Routing;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Tests.Filters
+namespace FigureMath.Apps.WebApi.Tests
 {
     public class CheckModelStateFilterTests
     {

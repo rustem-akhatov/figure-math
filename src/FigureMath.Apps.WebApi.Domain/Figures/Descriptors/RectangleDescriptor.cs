@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Describes a Rectangle.

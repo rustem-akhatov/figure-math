@@ -4,9 +4,8 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using EnsureThat;
-using FigureMath.Common.AspNet.Http;
 using FigureMath.Common.Logging;
-using FigureMath.Common.Net.Mime;
+using FigureMath.Common.Mime;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -47,7 +46,7 @@ namespace FigureMath.Common.AspNet.Logging
             
             _logger.LogInformation(startLogMessage);
 
-            (string responseBody, ExceptionDispatchInfo exceptionInfo) = await _next.TryRunAsync(context);
+            (string responseBody, ExceptionDispatchInfo exceptionInfo) = await _next.RunAndCaptureResultAsync(context);
             
             string completeLogMessage = GetCompleteLogMessage(request, context.Response, responseBody, exceptionInfo?.SourceException);
             

@@ -3,9 +3,8 @@
 using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using FigureMath.Data.Enums;
 
-namespace FigureMath.Data.Entities
+namespace FigureMath.Data
 {
     /// <summary>
     /// Defines a figure. Uses to keep information about figure in persistent store. 

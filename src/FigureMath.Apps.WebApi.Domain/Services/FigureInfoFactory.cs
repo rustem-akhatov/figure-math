@@ -1,10 +1,9 @@
 using System;
 using System.Reflection;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Data.Entities;
+using FigureMath.Data;
 
-namespace FigureMath.Apps.WebApi.Domain.Services
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Implementation of the factory to create a specific instance of the class derived from <see cref="FigureInfo"/>

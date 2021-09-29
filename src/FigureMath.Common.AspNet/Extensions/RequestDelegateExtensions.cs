@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using EnsureThat;
 using Microsoft.AspNetCore.Http;
 
-namespace FigureMath.Common.AspNet.Http
+namespace FigureMath.Common.AspNet
 {
     /// <summary>
     /// Extension methods for <see cref="RequestDelegate"/>.
@@ -19,7 +19,7 @@ namespace FigureMath.Common.AspNet.Http
         /// <param name="next">The <see cref="RequestDelegate"/>.</param>
         /// <param name="context">The <see cref="HttpContext"/> to pass to <paramref name="next"/>.</param>
         /// <returns>Tuple of HTTP-response body as a string and captured exception.</returns>
-        public static async Task<(string, ExceptionDispatchInfo)> TryRunAsync(this RequestDelegate next, HttpContext context)
+        public static async Task<(string, ExceptionDispatchInfo)> RunAndCaptureResultAsync(this RequestDelegate next, HttpContext context)
         {
             EnsureArg.IsNotNull(next, nameof(next));
             EnsureArg.IsNotNull(context, nameof(context));

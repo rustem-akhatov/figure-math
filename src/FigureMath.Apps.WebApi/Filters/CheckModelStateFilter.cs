@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace FigureMath.Apps.WebApi.Filters
+namespace FigureMath.Apps.WebApi
 {
     /// <summary>
     /// Ensures model is valid.

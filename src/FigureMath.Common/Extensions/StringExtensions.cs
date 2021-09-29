@@ -1,7 +1,7 @@
 using System;
 using EnsureThat;
 
-namespace FigureMath.Common.Extensions
+namespace FigureMath.Common
 {
     /// <summary>
     /// Extension methods for <see cref="string"/>.

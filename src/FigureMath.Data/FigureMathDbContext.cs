@@ -2,7 +2,6 @@
 
 using System.Collections.Immutable;
 using System.Text.Json;
-using FigureMath.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FigureMath.Data

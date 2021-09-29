@@ -1,16 +1,15 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 using System.Collections.Generic;
-using FigureMath.Apps.WebApi.Controllers;
 using System.ComponentModel.DataAnnotations;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 
-namespace FigureMath.Apps.WebApi.Models.Figures
+namespace FigureMath.Apps.WebApi
 {
     /// <summary>
-    /// Model of the input parameters for <see cref="FiguresController.PostFigure"/> action.
+    /// Model of the input parameters for <see cref="FiguresController.AddFigure"/> action.
     /// </summary>
-    public class PostFigureModel
+    public class AddFigureModel
     {
         /// <summary>
         /// Type of the figure.

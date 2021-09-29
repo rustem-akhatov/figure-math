@@ -16,17 +16,18 @@ namespace FigureMath.Apps.WebApi.AppStart
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="appConfig"></param>
-        public static void ConfigureData(this IServiceCollection services, IConfiguration appConfig)
+        public static IServiceCollection AddDataServices(this IServiceCollection services, IConfiguration appConfig)
         {
             EnsureArg.IsNotNull(services, nameof(services));
             EnsureArg.IsNotNull(appConfig, nameof(appConfig));
 
             string figureMathDbConnectionString = appConfig.GetConnectionString("FigureMathDb");
-            
-            services.AddDbContext<IFigureMathDbContext, FigureMathDbContext>(options =>
-            {
-                options.UseNpgsql(figureMathDbConnectionString);
-            });
+
+            return services
+                .AddDbContext<IFigureMathDbContext, FigureMathDbContext>(options =>
+                {
+                    options.UseNpgsql(figureMathDbConnectionString);
+                });
         }
     }
 }

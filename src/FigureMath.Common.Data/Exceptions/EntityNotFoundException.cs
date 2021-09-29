@@ -2,7 +2,7 @@ using System;
 using System.Runtime.Serialization;
 using EnsureThat;
 
-namespace FigureMath.Common.Data.Exceptions
+namespace FigureMath.Common.Data
 {
     /// <summary>
     /// Represents error that occur when the entity does not exist. 

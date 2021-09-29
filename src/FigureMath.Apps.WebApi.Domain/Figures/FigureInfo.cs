@@ -1,11 +1,9 @@
 using System;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Domain.Annotations;
-using FigureMath.Data.Entities;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using JetBrains.Annotations;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Represents a specific figure and can be used to calculate math measures.

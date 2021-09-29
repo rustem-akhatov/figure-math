@@ -1,14 +1,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Apps.WebApi.Domain.Services;
-using FigureMath.Common.Data.Extensions;
+using FigureMath.Common.Data;
 using FigureMath.Data;
-using FigureMath.Data.Entities;
 using MediatR;
 
-namespace FigureMath.Apps.WebApi.Domain.Messaging
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Handler for <see cref="GetFigureInfoRequest"/>.

@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using FigureMath.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FigureMath.Data

@@ -1,4 +1,4 @@
-namespace FigureMath.Apps.Hosting
+namespace FigureMath.Common.AspNet.Hosting
 {
     /// <summary>
     /// Custom used environment names.

@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using EnsureThat;
 
-namespace FigureMath.Common.Utils
+namespace FigureMath.Common
 {
     /// <summary>
     /// Helper methods to work with instances of the <see cref="Assembly"/> class.

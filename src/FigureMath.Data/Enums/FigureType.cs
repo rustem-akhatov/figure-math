@@ -1,4 +1,4 @@
-namespace FigureMath.Data.Enums
+namespace FigureMath.Data
 {
     /// <summary>
     /// Type of the figure.

@@ -1,6 +1,5 @@
-using FigureMath.Common.Extensions;
 using FigureMath.Common.Json;
-using FigureMath.Common.Net.Mime;
+using FigureMath.Common.Mime;
 
 namespace FigureMath.Common.Logging
 {

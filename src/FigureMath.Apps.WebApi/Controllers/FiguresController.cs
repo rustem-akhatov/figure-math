@@ -1,14 +1,12 @@
 using System.Globalization;
 using System.Threading.Tasks;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Apps.WebApi.Domain.Messaging;
-using FigureMath.Apps.WebApi.Models.Figures;
-using FigureMath.Data.Entities;
+using FigureMath.Apps.WebApi.Domain;
+using FigureMath.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FigureMath.Apps.WebApi.Controllers
+namespace FigureMath.Apps.WebApi
 {
     /// <summary>
     /// Controller to work with figures.
@@ -32,7 +30,7 @@ namespace FigureMath.Apps.WebApi.Controllers
         /// </summary>
         /// <param name="id">Identifier of the figure.</param>
         /// <returns>Entire information about the figure.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id:long}")]
         public async Task<IActionResult> GetFigure(long id)
         {
             var request = new GetFigureInfoRequest(id);
@@ -47,7 +45,7 @@ namespace FigureMath.Apps.WebApi.Controllers
         /// </summary>
         /// <param name="id">Identifier of the figure.</param>
         /// <returns>Calculated area of the figure.</returns>
-        [HttpGet("{id}/area")]
+        [HttpGet("{id:long}/area")]
         public async Task<IActionResult> GetFigureArea(long id)
         {
             var request = new GetFigureInfoRequest(id);
@@ -63,7 +61,7 @@ namespace FigureMath.Apps.WebApi.Controllers
         /// <param name="model">The model of the input parameters.</param>
         /// <returns>Identifier of the created figure and figure itself.</returns>
         [HttpPost]
-        public async Task<IActionResult> PostFigure([FromBody] PostFigureModel model)
+        public async Task<IActionResult> AddFigure([FromBody] AddFigureModel model)
         {
             var request = new AddFigureRequest(model.FigureType, model.FigureProps);
 

@@ -2,19 +2,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Apps.WebApi.Domain.Messaging;
-using FigureMath.Apps.WebApi.Domain.Services;
-using FigureMath.Common.Data.Exceptions;
+using FigureMath.Common.Data;
 using FigureMath.Data;
-using FigureMath.Data.Entities;
 using FigureMath.Data.Testing;
-using FigureMath.Data.Testing.AutoFixture.Extensions;
 using MediatR;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Messaging
+namespace FigureMath.Apps.WebApi.Domain.Tests
 {
     public class GetFigureInfoHandlerTests
     {
@@ -46,8 +41,7 @@ namespace FigureMath.Apps.WebApi.Domain.Tests.Messaging
         {
             // Arrange
             Figure figure = _fixture.CreateFigure();
-
-            // ReSharper disable once MethodHasAsyncOverload
+            
             _dbContext.Figures.Add(figure);
             
             await _dbContext.SaveChangesAsync();

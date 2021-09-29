@@ -3,10 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
 using FigureMath.Data;
-using FigureMath.Data.Entities;
 using MediatR;
 
-namespace FigureMath.Apps.WebApi.Domain.Messaging
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Handler for <see cref="AddFigureRequest"/>.
@@ -39,8 +38,7 @@ namespace FigureMath.Apps.WebApi.Domain.Messaging
                 FigureType = request.FigureType,
                 FigureProps = request.FigureProps.ToImmutableDictionary()
             };
-        
-            // ReSharper disable once MethodHasAsyncOverloadWithCancellation
+            
             _dbContext.Figures.Add(figure);
         
             await _dbContext.SaveChangesAsync(cancellationToken);

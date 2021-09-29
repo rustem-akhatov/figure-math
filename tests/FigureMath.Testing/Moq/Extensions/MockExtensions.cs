@@ -6,7 +6,7 @@ using EnsureThat;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace FigureMath.Testing.Moq.Extensions
+namespace FigureMath.Testing.Moq
 {
     /// <summary>
     /// Extension methods for <see cref="Mock{ILogger}"/> of <see cref="ILogger"/>.

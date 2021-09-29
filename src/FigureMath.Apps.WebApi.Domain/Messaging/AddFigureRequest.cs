@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using EnsureThat;
-using FigureMath.Data.Entities;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using MediatR;
 
-namespace FigureMath.Apps.WebApi.Domain.Messaging
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Allows to save information about the figure in the persistent store.

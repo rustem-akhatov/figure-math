@@ -21,15 +21,12 @@ namespace FigureMath.Apps.WebApi
         {
             EnsureArg.IsNotNull(services, nameof(services));
             
-            services.ConfigureData(_appConfig);
-            
-            services.ConfigureDomain();
-            
-            services.ConfigureValidation();
-            
-            services.ConfigureWebApi();
-            
-            services.ConfigureSwaggerPackage();
+            services
+                .AddDataServices(_appConfig)
+                .AddDomainServices()
+                .AddValidatorServices()
+                .AddWebApiServices()
+                .AddSwaggerServices();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,26 +34,21 @@ namespace FigureMath.Apps.WebApi
         {
             EnsureArg.IsNotNull(app, nameof(app));
 
-            app.UseUnhandledExceptionLogging();
-            
-            app.UseActivityId();
-
-            app.UseRequestResponseLogging();
-            
-            app.UseExceptionHandler(new ExceptionHandlerOptions
-            {
-                ExceptionHandlingPath = "/error/unknown",
-                AllowStatusCode404Response = true
-            });
-
-            app.UseRouting();
-            
-            app.UseSwaggerPackage();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseUnhandledExceptionLogging()
+                .UseActivityId()
+                .UseRequestResponseLogging()
+                .UseExceptionHandler(new ExceptionHandlerOptions
+                {
+                    ExceptionHandlingPath = "/error/unknown",
+                    AllowStatusCode404Response = true
+                })
+                .UseRouting()
+                .UseSwaggerApp()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }

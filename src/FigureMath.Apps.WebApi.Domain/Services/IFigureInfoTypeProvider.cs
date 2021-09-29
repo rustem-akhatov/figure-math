@@ -1,7 +1,7 @@
 using System;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 
-namespace FigureMath.Apps.WebApi.Domain.Services
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Interface of the provider to get <see cref="Type"/> that implements figure.

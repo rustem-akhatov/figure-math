@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FigureMath.Common.Net.Mime
+namespace FigureMath.Common.Mime
 {
     /// <summary>
     /// Specifies the media type information for a body of HTTP-request.

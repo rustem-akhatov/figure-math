@@ -1,14 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Messaging;
 using FigureMath.Data;
-using FigureMath.Data.Entities;
 using FigureMath.Data.Testing;
 using MediatR;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Messaging
+namespace FigureMath.Apps.WebApi.Domain.Tests
 {
     public class AddFigureHandlerTests
     {

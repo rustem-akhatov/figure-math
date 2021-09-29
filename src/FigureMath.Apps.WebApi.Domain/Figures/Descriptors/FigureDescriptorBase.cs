@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using EnsureThat;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using FluentValidation.Results;
 
-namespace FigureMath.Apps.WebApi.Domain.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Contains base logic to validate figure props.

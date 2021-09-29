@@ -1,10 +1,9 @@
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 
 using System;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 
-namespace FigureMath.Apps.WebApi.Domain.Annotations
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Must be used to decorate concrete implementation of the figure derived from <see cref="FigureInfo"/> class.
@@ -24,6 +23,6 @@ namespace FigureMath.Apps.WebApi.Domain.Annotations
         /// <summary>
         /// Type of the figure that class implements.
         /// </summary>
-        public FigureType FigureType { get; set; }
+        public FigureType FigureType { get; }
     }
 }

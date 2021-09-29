@@ -1,6 +1,5 @@
 using System.Text.Json;
 using EnsureThat;
-using FigureMath.Apps.WebApi.Properties;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +14,7 @@ namespace FigureMath.Apps.WebApi.AppStart
         /// Adds models validation services to <paramref name="services"/>.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-        public static void ConfigureValidation(this IServiceCollection services)
+        public static IServiceCollection AddValidatorServices(this IServiceCollection services)
         {
             EnsureArg.IsNotNull(services, nameof(services));
 
@@ -23,12 +22,13 @@ namespace FigureMath.Apps.WebApi.AppStart
 
             ValidatorOptions.Global.PropertyNameResolver =
                 (type, info, expression) => JsonNamingPolicy.CamelCase.ConvertName(defaultPropertyNameResolver(type, info, expression));
-            
-            services.Scan(scan => scan
-                .FromAssembliesOf(typeof(AssemblyInfo))
-                .AddClasses(classes => classes.AssignableTo<IValidator>())
-                .AsImplementedInterfaces()
-                .WithTransientLifetime());
+
+            return services
+                .Scan(scan => scan
+                    .FromAssembliesOf(typeof(AssemblyInfo))
+                    .AddClasses(classes => classes.AssignableTo<IValidator>())
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
         }
     }
 }

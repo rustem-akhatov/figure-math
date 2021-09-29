@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
-using FigureMath.Data.Enums;
+using FigureMath.Data;
 using FluentValidation.Results;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures.Descriptors
+namespace FigureMath.Apps.WebApi.Domain.Tests
 {
     public class TriangleDescriptorTests
     {

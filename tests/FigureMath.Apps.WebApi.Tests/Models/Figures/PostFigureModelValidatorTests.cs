@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures.Descriptors;
-using FigureMath.Apps.WebApi.Domain.Services;
-using FigureMath.Apps.WebApi.Models.Figures;
-using FigureMath.Data.Enums;
+using FigureMath.Apps.WebApi.Domain;
+using FigureMath.Data;
 using FluentValidation.Results;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Tests.Models.Figures
+namespace FigureMath.Apps.WebApi.Tests.Figures
 {
     public class PostFigureModelValidatorTests
     {
@@ -17,7 +15,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
 
         private readonly Mock<IFigureDescriptor> _figureDescriptorMock;
         
-        private readonly PostFigureModelValidator _validator;
+        private readonly AddFigureModelValidator _validator;
 
         public PostFigureModelValidatorTests()
         {
@@ -31,14 +29,14 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
                 .Setup(provider => provider.GetDescriptorFor(It.IsAny<FigureType>()))
                 .Returns(_figureDescriptorMock.Object);
 
-            _validator = new PostFigureModelValidator(figureDescriptorProviderMock.Object);
+            _validator = new AddFigureModelValidator(figureDescriptorProviderMock.Object);
         }
         
         [Fact]
         public void Validate_ShouldReturnValid_WhenAllPropsSpecifiedCorrectly()
         {
             // Arrange
-            var model = _fixture.Create<PostFigureModel>();
+            var model = _fixture.Create<AddFigureModel>();
 
             _figureDescriptorMock
                 .Setup(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string, double>>()))
@@ -58,7 +56,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
         public void Validate_ShouldReturnInvalid_WhenSomethingWrong()
         {
             // Arrange
-            var model = _fixture.Create<PostFigureModel>();
+            var model = _fixture.Create<AddFigureModel>();
 
             _figureDescriptorMock
                 .Setup(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string, double>>()))
@@ -78,7 +76,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
         public void Validate_ShouldReturnOnlyContextPropertyName_WhenFailurePropertyNameIsNull()
         {
             // Arrange
-            var model = _fixture.Create<PostFigureModel>();
+            var model = _fixture.Create<AddFigureModel>();
 
             _figureDescriptorMock
                 .Setup(descriptor => descriptor.ValidateProps(It.IsAny<IDictionary<string, double>>()))
@@ -91,14 +89,14 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             Assert.NotNull(validationResult);
             Assert.False(validationResult.IsValid);
             
-            Assert.All(validationResult.Errors, error => Assert.Equal(nameof(PostFigureModel.FigureProps), error.PropertyName));
+            Assert.All(validationResult.Errors, error => Assert.Equal(nameof(AddFigureModel.FigureProps), error.PropertyName));
         }
         
         [Fact]
         public void Validate_ShouldReturnCombinedPropertyName_WhenFailurePropertyNameIsNotNull()
         {
             // Arrange
-            var model = _fixture.Create<PostFigureModel>();
+            var model = _fixture.Create<AddFigureModel>();
 
             ValidationFailure[] failures = _fixture.CreateMany<ValidationFailure>().ToArray();
             
@@ -114,7 +112,7 @@ namespace FigureMath.Apps.WebApi.Tests.Models.Figures
             Assert.False(validationResult.IsValid);
             
             Assert.All(validationResult.Errors, 
-                error => Assert.Contains(failures, failure => error.PropertyName == $"{nameof(PostFigureModel.FigureProps)}.{failure.PropertyName}"));
+                error => Assert.Contains(failures, failure => error.PropertyName == $"{nameof(AddFigureModel.FigureProps)}.{failure.PropertyName}"));
         }
     }
 }

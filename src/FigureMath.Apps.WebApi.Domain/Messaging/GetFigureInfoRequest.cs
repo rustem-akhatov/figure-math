@@ -1,7 +1,6 @@
-using FigureMath.Apps.WebApi.Domain.Figures;
 using MediatR;
 
-namespace FigureMath.Apps.WebApi.Domain.Messaging
+namespace FigureMath.Apps.WebApi.Domain
 {
     /// <summary>
     /// Allows to get concrete implementation of the figure.

@@ -1,4 +1,4 @@
-using FigureMath.Apps.Hosting;
+using FigureMath.Common.AspNet.Hosting;
 using FigureMath.Data;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;

@@ -1,9 +1,8 @@
 using System;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Domain.Figures;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Domain.Tests.Figures
+namespace FigureMath.Apps.WebApi.Domain.Tests
 {
     public class CircleInfoTests
     {

@@ -2,19 +2,15 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture;
-using FigureMath.Apps.WebApi.Controllers;
-using FigureMath.Apps.WebApi.Domain.Figures;
-using FigureMath.Apps.WebApi.Domain.Messaging;
-using FigureMath.Apps.WebApi.Models.Figures;
-using FigureMath.Data.Entities;
-using FigureMath.Data.Enums;
-using FigureMath.Data.Testing.AutoFixture.Extensions;
+using FigureMath.Apps.WebApi.Domain;
+using FigureMath.Data;
+using FigureMath.Data.Testing;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Tests.Controllers
+namespace FigureMath.Apps.WebApi.Tests
 {
     public class FiguresControllerTests
     {
@@ -95,7 +91,7 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
                 .ReturnsAsync(figure);
 
             // Act
-            IActionResult actionResult = await _controller.PostFigure(_fixture.Create<PostFigureModel>());
+            IActionResult actionResult = await _controller.AddFigure(_fixture.Create<AddFigureModel>());
 
             // Assert
             Assert.NotNull(actionResult);

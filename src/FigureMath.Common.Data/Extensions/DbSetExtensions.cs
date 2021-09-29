@@ -1,10 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EnsureThat;
-using FigureMath.Common.Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
-namespace FigureMath.Common.Data.Extensions
+namespace FigureMath.Common.Data
 {
     /// <summary>
     /// Extension methods for <see cref="DbSet{TEntity}"/>.

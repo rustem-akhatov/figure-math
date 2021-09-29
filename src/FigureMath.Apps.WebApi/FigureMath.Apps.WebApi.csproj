@@ -32,8 +32,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Models\Figures\PostFigureModelValidator.cs">
-        <DependentUpon>PostFigureModel.cs</DependentUpon>
+      <Compile Update="Models\Figures\AddFigureModelValidator.cs">
+        <DependentUpon>AddFigureModel.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

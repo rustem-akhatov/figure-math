@@ -15,7 +15,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FigureMath.Common.Data\FigureMath.Common.Data.csproj" />
       <ProjectReference Include="..\FigureMath.Common\FigureMath.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="ExceptionHandling\DefaultProblemInfo.cs">
+        <DependentUpon>IProblemInfo.cs</DependentUpon>
+      </Compile>
+      <Compile Update="ExceptionHandling\DefaultProblemInfoFactory.cs">
+        <DependentUpon>IProblemInfoFactory.cs</DependentUpon>
+      </Compile>
+      <Compile Update="ExceptionHandling\EntityNotFoundProblemInfo.cs">
+        <DependentUpon>IProblemInfo.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

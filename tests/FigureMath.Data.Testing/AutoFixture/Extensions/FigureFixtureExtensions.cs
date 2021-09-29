@@ -3,10 +3,8 @@ using System.Collections.Immutable;
 using AutoFixture;
 using AutoFixture.Dsl;
 using EnsureThat;
-using FigureMath.Data.Entities;
-using FigureMath.Data.Enums;
 
-namespace FigureMath.Data.Testing.AutoFixture.Extensions
+namespace FigureMath.Data.Testing
 {
     /// <summary>
     /// Extension methods for <see cref="IFixture"/> to build <see cref="Figure"/>.

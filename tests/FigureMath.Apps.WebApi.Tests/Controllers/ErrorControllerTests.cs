@@ -1,9 +1,8 @@
 using System;
 using AutoFixture;
-using FigureMath.Apps.Hosting;
-using FigureMath.Apps.WebApi.Controllers;
-using FigureMath.Common.Data.Exceptions;
-using FigureMath.Testing.Moq.Extensions;
+using FigureMath.Common.AspNet.ExceptionHandling;
+using FigureMath.Common.AspNet.Hosting;
+using FigureMath.Testing.Moq;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -13,12 +12,13 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace FigureMath.Apps.WebApi.Tests.Controllers
+namespace FigureMath.Apps.WebApi.Tests
 {
     public class ErrorControllerTests
     {
         private readonly Fixture _fixture;
-        
+
+        private readonly Mock<IProblemInfoFactory> _problemInfoFactoryMock;
         private readonly Mock<IHostEnvironment> _hostEnvironmentMock;
         private readonly Mock<ILogger<ErrorController>> _loggerMock;
         
@@ -29,7 +29,8 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
         public ErrorControllerTests()
         {
             _fixture = new Fixture();
-            
+
+            _problemInfoFactoryMock = new Mock<IProblemInfoFactory>();
             _hostEnvironmentMock = new Mock<IHostEnvironment>();
             _loggerMock = new Mock<ILogger<ErrorController>>();
 
@@ -48,7 +49,7 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
                 .SetupGet(context => context.Request)
                 .Returns(Mock.Of<HttpRequest>());
             
-            _controller = new ErrorController(_hostEnvironmentMock.Object, _loggerMock.Object)
+            _controller = new ErrorController(_problemInfoFactoryMock.Object, _hostEnvironmentMock.Object, _loggerMock.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -72,45 +73,46 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             _loggerMock.VerifyLogged(LogLevel.Error, Times.Never);
         }
 
-        [Fact]
-        public void Unknown_ShouldReturnNotFoundWithProblem_WhenEntityNotFoundExceptionOccured()
-        {
-            // Arrange
-            _exceptionHandlerPathFeatureMock
-                .SetupGet(feature => feature.Error)
-                .Returns(_fixture.Create<EntityNotFoundException>());
-
-            // Act
-            IActionResult actionResult = _controller.Unknown();
-
-            // Assert
-            Assert.NotNull(actionResult);
-            Assert.IsType<ObjectResult>(actionResult);
-
-            var objectResult = (ObjectResult)actionResult;
-            Assert.Equal(StatusCodes.Status404NotFound, objectResult.StatusCode);
-            
-            _loggerMock.VerifyLogged(LogLevel.Error, Times.Never);
-        }
-        
-        [Fact]
-        public void Unknown_ShouldReturnInternalServerError_WhenUnknownExceptionOccured()
+        [Theory]
+        [InlineData(StatusCodes.Status400BadRequest)]
+        [InlineData(StatusCodes.Status404NotFound)]
+        public void Unknown_ShouldJustReturnProblem_WhenClientError(int statusCode)
         {
             // Arrange
             _exceptionHandlerPathFeatureMock
                 .SetupGet(feature => feature.Error)
                 .Returns(_fixture.Create<Exception>());
 
+            _problemInfoFactoryMock
+                .Setup(factory => factory.Create(It.IsAny<ProblemContext>()))
+                .Returns(new FakeProblemInfo(statusCode));
+
             // Act
             IActionResult actionResult = _controller.Unknown();
 
             // Assert
             Assert.NotNull(actionResult);
-            Assert.IsType<ObjectResult>(actionResult);
 
-            var objectResult = (ObjectResult)actionResult;
-            Assert.Equal(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
-            
+            _loggerMock.VerifyLogged(LogLevel.Error, Times.Never);
+        }
+
+        [Theory]
+        [InlineData(StatusCodes.Status500InternalServerError)]
+        public void Unknown_ShouldLogError_WhenServerError(int statusCode)
+        {
+            // Arrange
+            _exceptionHandlerPathFeatureMock
+                .SetupGet(feature => feature.Error)
+                .Returns(_fixture.Create<Exception>());
+
+            _problemInfoFactoryMock
+                .Setup(factory => factory.Create(It.IsAny<ProblemContext>()))
+                .Returns(new FakeProblemInfo(statusCode));
+
+            // Act
+            _controller.Unknown();
+
+            // Assert
             _loggerMock.VerifyLogged(LogLevel.Error, Times.Once);
         }
 
@@ -129,6 +131,10 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             _hostEnvironmentMock
                 .SetupGet(host => host.EnvironmentName)
                 .Returns(environment);
+
+            _problemInfoFactoryMock
+                .Setup(factory => factory.Create(It.IsAny<ProblemContext>()))
+                .Returns(new FakeProblemInfo(StatusCodes.Status500InternalServerError));
 
             // Act
             IActionResult actionResult = _controller.Unknown();
@@ -161,6 +167,10 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
                 .SetupGet(host => host.EnvironmentName)
                 .Returns(environment);
             
+            _problemInfoFactoryMock
+                .Setup(factory => factory.Create(It.IsAny<ProblemContext>()))
+                .Returns(new FakeProblemInfo(StatusCodes.Status500InternalServerError));
+            
             // Act
             IActionResult actionResult = _controller.Unknown();
 
@@ -187,6 +197,22 @@ namespace FigureMath.Apps.WebApi.Tests.Controllers
             {
                 return ex;
             }
+        }
+        
+        private class FakeProblemInfo : IProblemInfo
+        {
+            public FakeProblemInfo(int statusCode)
+            {
+                StatusCode = statusCode;
+            }
+            
+            // ReSharper disable once UnassignedGetOnlyAutoProperty
+            public string ProblemType { get; }
+            
+            public int StatusCode { get; }
+            
+            // ReSharper disable once UnassignedGetOnlyAutoProperty
+            public string Title { get; }
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace FigureMath.Common.AspNet.Infrastructure
+namespace FigureMath.Common.AspNet.ExceptionHandling
 {
     /// <summary>
     /// Represents decorator of the <see cref="ProblemDetailsFactory"/> class that replace traceId extension

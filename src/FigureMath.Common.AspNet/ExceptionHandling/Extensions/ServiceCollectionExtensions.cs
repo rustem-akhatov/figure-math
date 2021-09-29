@@ -2,7 +2,7 @@ using EnsureThat;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FigureMath.Common.AspNet.Infrastructure
+namespace FigureMath.Common.AspNet.ExceptionHandling
 {
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.

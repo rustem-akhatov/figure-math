@@ -32,6 +32,18 @@
       <Compile Update="Services\FigureInfoTypeProvider.cs">
         <DependentUpon>IFigureInfoTypeProvider.cs</DependentUpon>
       </Compile>
+      <Compile Update="Figures\Descriptors\FigureDescriptorBase.cs">
+        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Figures\Descriptors\CircleDescriptor.cs">
+        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Figures\Descriptors\RectangleDescriptor.cs">
+        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Figures\Descriptors\TriangleDescriptor.cs">
+        <DependentUpon>IFigureDescriptor.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

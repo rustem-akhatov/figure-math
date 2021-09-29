@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using FigureMath.Common.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -41,7 +40,7 @@ namespace FigureMath.Common.Json
 
         private static void TruncateLongStrings(JToken node, int maxLengthPerPropertyToKeep)
         {
-            if (node.Type == JTokenType.Object || node.Type == JTokenType.Array)
+            if (node.Type is JTokenType.Object or JTokenType.Array)
             {
                 foreach (JToken child in node.Children().ToList())
                 {

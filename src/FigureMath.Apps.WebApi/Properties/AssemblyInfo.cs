@@ -1,4 +1,4 @@
-namespace FigureMath.Apps.WebApi.Properties
+namespace FigureMath.Apps.WebApi
 {
     /// <summary>
     /// Contains information about the Assembly. 
